@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MessageCreated;
 use App\Models\Conversation;
 use App\Models\Message;
 use App\Models\Recipient;
@@ -91,6 +92,8 @@ class MessagesController extends Controller
                             WHERE conversation_id=?
                             ", [$message->id, $conversation->id]);
                 DB::commit();
+
+                broadcast(new MessageCreated($message));
             }
         } catch (Throwable $e) {
             DB::rollBack();
