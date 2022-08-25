@@ -2099,7 +2099,7 @@
         </aside>
         <!-- Sidebar -->
 
-        <messenger :conversation="conversation" :messages="messages"/>
+        <messenger :conversation="conversation" />
 
         <!-- Chat: Info -->
         <div class="offcanvas offcanvas-end offcanvas-aside" data-bs-scroll="true" data-bs-backdrop="false"

@@ -7,7 +7,7 @@
         <!-- Chat: Files -->
 
         <!-- Chat: Form -->
-        <form class="chat-form rounded-pill bg-dark" data-emoji-form="" method="post" action="/api/messages">
+        <form class="chat-form rounded-pill bg-dark" data-emoji-form="" method="post" action="/api/messages" @submit.prevent="sendMessage()">
             <!---->
             <input type="hidden" name="_token" :value="$root.csrfToken">
             <input type="hidden" name="conversation_id" :value="conversation? conversation.id:''">
@@ -26,7 +26,7 @@
 
                 <div class="col">
                     <div class="input-group">
-                        <textarea id="new_message" class="form-control px-0" placeholder="Type your message..." rows="1"
+                        <textarea id="new_message" v-model="message" class="form-control px-0" placeholder="Type your message..." rows="1"
                             data-emoji-input="" name="message" data-autosize="true"></textarea>
 
                         <a href="#" class="input-group-text text-body pe-0" data-emoji-btn="">
@@ -67,6 +67,33 @@ export default{
     props:[
         'conversation'
     ],
+    data(){
+        return{
+            message:''
+        }
+    },
+    methods:{
+        sendMessage(){
+            let data={
+                _token:this.$root.csrfToken,
+                message:this.message,
+                conversation_id:this.conversation.id
+            }
+            fetch('/api/messages',{
+                method:'POST',
+                mode:'cors',
+                headers:{
+                    'Content-Type':'application/json',
+                    'X-CSRF-TOKEN':this.$root.csrfToken
+                },
+                body:JSON.stringify(data)
+            }).then(res=>res.json())
+            .then(json=>{
+                this.$parent.messages.push(json)
+            })
+            this.message=''
+        }
+    }
 
 }
 </script>

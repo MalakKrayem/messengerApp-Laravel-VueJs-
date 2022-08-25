@@ -30,8 +30,13 @@ export default{
         ChatFooter
     },
     props:[
-        "conversation","messages"
+        "conversation"
     ],
+    data(){
+        return{
+            messages:[]
+        }
+    },
 
 
 }

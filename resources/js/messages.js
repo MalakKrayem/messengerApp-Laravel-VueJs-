@@ -8,7 +8,6 @@ import ChatList from './components/messages/ChatList.vue'
     data(){
         return{
             conversation:null,
-            messages:[],
             userId:userId,
             csrfToken: csrf_token
 
