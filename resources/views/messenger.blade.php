@@ -3623,28 +3623,28 @@
     <!-- Scripts -->
     <script src="{{asset('assets/js/vendor.js')}}"></script>
     <script src="{{asset('assets/js/template.js')}}"></script>
-    <script src="sw.js"></script>
+    {{-- <script src="sw.js"></script> --}}
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{asset('assets/js/moment.js')}}"></script>
     @vite('resources/js/messages.js')
     {{-- <script src="{{asset('assets/js/messenger.js')}}"></script> --}}
-    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+    {{-- <script src="https://js.pusher.com/7.2/pusher.min.js"></script> --}}
     <script>
         // Enable pusher logging - don't include this in production
     const userId={{Auth::id()}};
     const csrf_token ="{{csrf_token()}}";
-    Pusher.logToConsole = true;
+    // Pusher.logToConsole = true;
 
-    var pusher = new Pusher('4ecfd67fb6e32181e867', {
-      cluster: 'us2',
-      authEndpoint: '/broadcasting/auth',
-    });
+    // var pusher = new Pusher('4ecfd67fb6e32181e867', {
+    //   cluster: 'us2',
+    //   authEndpoint: '/broadcasting/auth',
+    // });
 
-    var channel = pusher.join('presence-Messenger'.userId);
-    channel.bind('new-message', function(data) {
-      addMessage(data.message);
-    });
+    // var channel = pusher.join('presence-Messenger'.userId);
+    // channel.bind('new-message', function(data) {
+    //   addMessage(data.message);
+    // });
     </script>
     {{-- <script type="text/javascript">
         navigator.serviceWorker.register('sw.js').then(function(reg) {

@@ -35,7 +35,7 @@ class MessagesController extends Controller
 
         return [
             'conversation' => $conversation,
-            'messages'=>$conversation->messages()->with('user')->paginate(50)];
+            'messages'=>$conversation->messages()->with('user')->paginate()];
     }
 
     /**

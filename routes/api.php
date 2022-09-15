@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-Route::middleware('auth:sanctum')->group(function(){
+//Route::middleware('auth:sanctum')->group(function(){
 Route::get('conversations', [ConversationController::class, 'index']);
 Route::get('conversations/{conversation}', [ConversationController::class, 'show']);
 Route::post('conversations/{conversation}/participants', [ConversationController::class, 'addParticipents']);
@@ -29,4 +29,4 @@ Route::delete('conversations/{conversation}/participants', [ConversationControll
 Route::get('conversations/{id}/messages', [MessagesController::class, 'index']);
 Route::post('messages', [MessagesController::class, 'store'])->name('api.messages.store');
 Route::delete('messages/{id}', [MessagesController::class, 'destroy']);
-});
+//});

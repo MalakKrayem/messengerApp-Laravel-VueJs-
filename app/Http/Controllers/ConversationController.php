@@ -25,7 +25,8 @@ class ConversationController extends Controller
                     $builder->where('user_id', '<>', $user->id);
                 }
             ]
-        )->paginate();
+        )
+        ->paginate();
 
     }
 

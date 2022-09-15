@@ -20,6 +20,17 @@ class Conversation extends Model
     {
         return $this->belongsToMany(User::class, "participants")->withPivot(["role", "joined_at"]);
     }
+    public function recipients()
+    {
+        return $this->hasManyThrough(
+            Recipient::class,
+            Message::class,
+            'conversation_id',
+            'message_id',
+            'id',
+            'id'
+        );
+    }
     public function messages()
     {
         return $this->hasMany(Message::class, "conversation_id", "id");

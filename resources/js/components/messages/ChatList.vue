@@ -28,12 +28,13 @@
 
         <!-- Chats -->
         <div class="card-list" id="chat-list">
-            <a v-for="conversation in conversations" v-bind:key="conversation.id" :href="'#'+ conversation.id"
+            <a v-for="conversation in $root.conversations" v-bind:key="conversation.id" :href="'#'+ conversation.id"
                 class="card border-0 text-reset" @click.prevent="setConversation(conversation)">
                 <div class="card-body">
                     <div class="row gx-5">
                         <div class="col-auto">
-                            <div class="avatar avatar-online">
+                            <div class="avatar "
+                                :class="{'avatar-online': conversation.participants[0].isOnline}">
                                 <img v-bind:src="conversation.participants[0].avatar_url">
                             </div>
                         </div>
@@ -64,22 +65,23 @@
 <script>
 
 export default{
-    data(){
-        return{
-            conversations:[]
-        }
-    },
+    
     methods:{
 
         setConversation(conversation){
             
             this.$root.conversation=conversation;
 
-        }
+        },
+
     },
     mounted(){
         fetch('/api/conversations').then(response=>response.json()).then(json=>{
-            this.conversations=json.data
+            for (let i in json.data) {
+                 json.data[i].participants[0].isOnline = false
+            }
+            this.$root.conversations=json.data
+            
         })
 
     }
